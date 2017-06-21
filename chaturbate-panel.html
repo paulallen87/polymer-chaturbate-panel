@@ -1,0 +1,77 @@
+<link rel="import" href="../polymer/polymer-element.html">
+
+<dom-module id="chaturbate-panel">
+
+  <template>
+    <style>
+      :host {
+        --cb-info-color: #fff;
+        --cb-chat-text-shadow-color: rgba(0, 0, 0, 0.65);
+        --cb-default-background-color: rgba(0,0,0,0.5);
+      }
+
+      .panel {
+        color: var(--cb-info-color);
+        background-color: var(--cb-default-background-color);
+        text-shadow: -1px 0 var(--cb-chat-text-shadow-color),
+                     0 1px var(--cb-chat-text-shadow-color),
+                     1px 0 var(--cb-chat-text-shadow-color),
+                     0 -1px var(--cb-chat-text-shadow-color);
+        display: inline-table;
+        padding: 8px;
+        border-radius: 4px;
+        margin: 4px;
+      }
+    </style>
+
+    <div class="panel">
+      <template is="dom-repeat" items="{{panel}}">
+        <div>
+          <template id="dom-if" if="{{item.label}}">
+            <span>{{item.label}}</span>:&nbsp;
+          </template>
+          <span>{{item.value}}</span>
+        </div>
+      </template>
+    </div>
+
+  </template>
+
+  <script>
+    class ChaturbatePanel extends Polymer.Element {
+      static get is() {
+        return 'chaturbate-panel';
+      }
+
+      static get properties() {
+        return {
+          panel: {
+            type: Array,
+            value: [],
+            notify: true,
+            observer: '_onPanelUpdate'
+          }
+        }
+      }
+
+      _isCrazyGoal() {
+
+      }
+
+      _isTipJar(panel) {
+        // Keep It Going: Don't Let It Empty
+        // Tip Jar: 80
+        // Big Tipper: johnnymac3(482)
+        if (panel.length != 3) return false;
+
+        if (panel[1].label == 'Tip Jar') return true;
+      }
+
+      _onPanelUpdate(panel) {
+
+      }
+    }
+
+    window.customElements.define(ChaturbatePanel.is, ChaturbatePanel);
+  </script>
+</dom-module>
