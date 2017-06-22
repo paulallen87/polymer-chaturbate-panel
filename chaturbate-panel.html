@@ -22,13 +22,17 @@
         border-radius: 4px;
         margin: 4px;
       }
+
+      .label {
+        font-weight: bold;
+      }
     </style>
 
     <div class="panel">
       <template is="dom-repeat" items="{{panel}}">
         <div>
-          <template id="dom-if" if="{{item.label}}">
-            <span>{{item.label}}</span>:&nbsp;
+          <template is="dom-if" if="{{item.label}}">
+            <span class="label">{{item.label}}</span>:&nbsp;
           </template>
           <span>{{item.value}}</span>
         </div>
@@ -47,28 +51,9 @@
         return {
           panel: {
             type: Array,
-            value: [],
-            notify: true,
-            observer: '_onPanelUpdate'
+            value: []
           }
         }
-      }
-
-      _isCrazyGoal() {
-
-      }
-
-      _isTipJar(panel) {
-        // Keep It Going: Don't Let It Empty
-        // Tip Jar: 80
-        // Big Tipper: johnnymac3(482)
-        if (panel.length != 3) return false;
-
-        if (panel[1].label == 'Tip Jar') return true;
-      }
-
-      _onPanelUpdate(panel) {
-
       }
     }
 
